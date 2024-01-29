@@ -9,3 +9,7 @@
 
 ## About Project
 
+=>use JWT Token for user auth
+=>use email for OTP check
+
+
