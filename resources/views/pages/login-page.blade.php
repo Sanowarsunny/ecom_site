@@ -2,7 +2,7 @@
 @section('content')
     @include('component.MenuBar')
     @include('component.Login')
-    @include('component.TopBrands')
+    {{-- @include('component.TopBrands') --}}
     @include('component.Footer')
     <script>
         (async () => {

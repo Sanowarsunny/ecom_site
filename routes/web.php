@@ -7,6 +7,7 @@ use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\TokenAuthenticate;
 use Illuminate\Support\Facades\Route;
 
 //pages
@@ -43,3 +44,7 @@ Route::get("/PolicyByType/{type}",[PolicyController::class,'PolicyByType']);
 Route::get('/UserLogin/{UserEmail}', [UserController::class, 'UserLogin']);
 Route::get('/VerifyLogin/{UserEmail}/{OTP}', [UserController::class, 'VerifyLogin']);
 Route::get('/logout',[UserController::class,'UserLogout']);
+
+// User Profile
+Route::post('/CreateProfile', [ProfileController::class, 'CreateProfile'])->middleware([TokenAuthenticate::class]);
+Route::get('/ReadProfile', [ProfileController::class, 'ReadProfile'])->middleware([TokenAuthenticate::class]);
