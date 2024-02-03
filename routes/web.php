@@ -44,5 +44,5 @@ Route::get('/VerifyLogin/{UserEmail}/{OTP}', [UserController::class, 'VerifyLogi
 Route::get('/logout',[UserController::class,'UserLogout']);
 
 // User Profile
-// Route::post('/CreateProfile', [ProfileController::class, 'CreateProfile'])->middleware([TokenAuthenticate::class]);
-// Route::get('/ReadProfile', [ProfileController::class, 'ReadProfile'])->middleware([TokenAuthenticate::class]);
+Route::post('/CreateProfile', [ProfileController::class, 'CreateProfile'])->middleware([TokenAuthenticate::class]);
+Route::get('/ReadProfile', [ProfileController::class, 'ReadProfile'])->middleware([TokenAuthenticate::class]);
