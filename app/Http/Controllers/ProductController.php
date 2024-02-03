@@ -8,6 +8,7 @@ use App\Models\ProductDetails;
 use App\Models\ProductReview;
 use App\Models\ProductSlider;
 use App\Models\ProductWish;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -38,13 +39,12 @@ class ProductController extends Controller
         return ResponseHelper::Out('success',$data,200);
     }
 
-    public function ListProductByRemark(Request $request):JsonResponse{
-        $data=Product::where('remark',$request->remark)->with('brand','category')->get();
-        return ResponseHelper::Out('success',$data,200);
-    }
-
     public function ListProductByBrand(Request $request):JsonResponse{
         $data=Product::where('brand_id',$request->id)->with('brand','category')->get();
+        return ResponseHelper::Out('success',$data,200);
+    }
+    public function ListProductByRemark(Request $request):JsonResponse{
+        $data=Product::where('remark',$request->remark)->with('brand','category')->get();
         return ResponseHelper::Out('success',$data,200);
     }
 
@@ -61,11 +61,20 @@ class ProductController extends Controller
     }
 
     public function ListReviewByProduct(Request $request):JsonResponse{
-        $data=ProductReview::where('product_id',$request->product_id)
+        
+        try{
+            $data=ProductReview::where('product_id',$request->product_id)
             ->with(['profile'=>function($query){
                 $query->select('id','cus_name');
             }])->get();
-        return ResponseHelper::Out('success',$data,200);
+            return ResponseHelper::Out('success',$data,200);
+        }
+        catch(Exception $e){
+            return response()->json([
+                'status'=>'fail',
+                'message' => $e->getMessage()
+            ]);
+        }
     }
 
 
