@@ -20,13 +20,10 @@ class ProductController extends Controller
     {
         return view('pages.wish-list-page');
     }
-
-
     public function CartListPage()
     {
         return view('pages.cart-list-page');
     }
-
 
     public function Details()
     {
@@ -77,8 +74,6 @@ class ProductController extends Controller
         }
     }
 
-
-
     public function CreateProductReview(Request $request):JsonResponse{
         $user_id=$request->header('id');
         $profile=CustomerProfile::where('user_id',$user_id)->first();
@@ -113,7 +108,6 @@ class ProductController extends Controller
         );
         return ResponseHelper::Out('success',$data,200);
     }
-
 
     public function RemoveWishList(Request $request):JsonResponse{
         $user_id=$request->header('id');
